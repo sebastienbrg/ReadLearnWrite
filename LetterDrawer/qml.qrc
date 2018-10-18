@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>LetterAnimCanvas.qml</file>
+        <file>DrawFunctions.qml</file>
+        <file>DrawTheLetter.qml</file>
+        <file>DistanceDisplay.qml</file>
+        <file>LetterDisplay.qml</file>
+        <file>LetterCarroussel.qml</file>
+        <file>CurrentLetterManager.qml</file>
+        <file>LetterGame.qml</file>
+        <file>MovingInAnOutFrame.qml</file>
+        <file>GenericToolBox.qml</file>
+        <file>BackGround.qml</file>
+        <file>img/grass.png</file>
+        <file>img/nuage.png</file>
+        <file>img/palmier.png</file>
+        <file>img/sand.png</file>
+        <file>Validable.qml</file>
+        <file>FindLetters.qml</file>
+        <file>img/arbre.png</file>
+        <file>img/check.png</file>
+        <file>WonGameAnimation.qml</file>
+    </qresource>
+</RCC>

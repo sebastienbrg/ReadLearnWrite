@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>CurrentLetterManager.qml</file>
+        <file>DrawFunctions.qml</file>
+        <file>LetterEditor.qml</file>
+        <file>ToolBox.qml</file>
+    </qresource>
+</RCC>
