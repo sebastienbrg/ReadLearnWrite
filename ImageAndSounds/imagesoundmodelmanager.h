@@ -12,7 +12,7 @@ class ImageSoundModelManager : public QObject
 public:
     explicit ImageSoundModelManager(QObject *parent = nullptr);
     ImageSoundsModel* getModel() const;
-    Q_INVOKABLE void addImageSoundToModel(const QString& imageName);
+    Q_INVOKABLE void addImageSoundToModel(const QString& imageName, const QString &imageFilePath, const QString &imageSounds);
 private:
     void initModel();
     std::unique_ptr<ImageSoundsModel> mModel;

@@ -13,6 +13,7 @@ public:
 
     QStringList imgSounds() const;
     void setImgSounds(const QStringList &imgSounds);
+    void setImgSounds(const QString& imgSounds);
 
 private:
     QString mName;

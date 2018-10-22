@@ -85,3 +85,8 @@ void ImageSounds::setImgSounds(const QStringList &imgSounds)
 {
     mImgSounds = imgSounds;
 }
+
+void ImageSounds::setImgSounds(const QString &imgSounds)
+{
+    mImgSounds = imgSounds.split(" ");
+}

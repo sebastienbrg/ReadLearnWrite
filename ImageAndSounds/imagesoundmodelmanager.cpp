@@ -12,9 +12,13 @@ ImageSoundsModel *ImageSoundModelManager::getModel() const
     return mModel.get();
 }
 
-void ImageSoundModelManager::addImageSoundToModel(const QString &imageName)
+void ImageSoundModelManager::addImageSoundToModel(const QString &imageName,
+                                                  const QString& imageFilePath,
+                                                  const QString& imageSounds)
 {
-    mModel->addImage(imageName);
+    ImageSounds& img =  mModel->addImage(imageName);
+    img.setImgPath(imageFilePath);
+    img.setImgSounds(imageSounds);
 }
 
 void ImageSoundModelManager::initModel()
