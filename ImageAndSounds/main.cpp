@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("imageSoundsModel", manager.getModel());
+    engine.rootContext()->setContextProperty("imageSoundsManager", &manager);
     engine.load(QUrl("./main.qml"));
     if (engine.rootObjects().isEmpty())
         return -1;

@@ -12,6 +12,11 @@ ImageSoundsModel *ImageSoundModelManager::getModel() const
     return mModel.get();
 }
 
+void ImageSoundModelManager::addImageSoundToModel(const QString &imageName)
+{
+    mModel->addImage(imageName);
+}
+
 void ImageSoundModelManager::initModel()
 {
     for(auto name : {"bla", "blou", "blo", "blé"}){

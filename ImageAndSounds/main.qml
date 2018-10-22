@@ -82,9 +82,10 @@ Window {
             id: saveImg
             text: "Save img"
             onClicked: {
-                image.grabToImage(function(result) {
-                                           result.saveToFile("../LetterDrawer/img/gameImg/" +imgName.text+".png");
-                                       });
+//                image.grabToImage(function(result) {
+//                                           result.saveToFile("../LetterDrawer/img/gameImg/" +imgName.text+".png");
+//                                       });
+                imageSoundsManager.addImageSoundToModel(imgName.text);
             }
         }
     }
