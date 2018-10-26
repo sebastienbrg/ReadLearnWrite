@@ -46,7 +46,7 @@ Window {
                         text: "Sounds:"
                     }
                     TextEdit{
-                        id: sounds
+                        id: imgSounds
                         width: 200
                         text: ""
                     }
@@ -55,6 +55,14 @@ Window {
             }
         }
     }
+    function loadImage(name, filePath, sounds){
+        console.log("Loading img at index ", name);
+        imgName.text = name;
+        imgUrl.text = filePath;
+        image.source = filePath;
+        imgSounds.text = sounds.join(" ");
+    }
+
     ListView{
         anchors.fill: parent;
         anchors.leftMargin: imgRect.width
@@ -62,8 +70,10 @@ Window {
 
         model: imageSoundsModel;
         delegate:  ImageSoundsEntry{
-            name : model.name
-            index : model.index
+            name : model.name;
+            index : model.index;
+            source: model.filePath;
+            onClicked: root.loadImage(model.name, model.filePath, model.sounds);
         }
     }
 
@@ -84,7 +94,8 @@ Window {
             onClicked: {
                 imageSoundsManager.addImageSoundToModel(imgName.text,
                                                         imgUrl.text,
-                                                        sounds.text);
+                                                        imgSounds.text);
+                image.source = imgUrl.text;
             }
         }
     }
@@ -101,7 +112,7 @@ Window {
             anchors.fill: parent
             height: parent.height - tools.height
             fillMode: Image.PreserveAspectFit
-            source: "../LetterDrawer/img/arbre.png"
+//            source: "../LetterDrawer/img/arbre.png"
         }
     }
 

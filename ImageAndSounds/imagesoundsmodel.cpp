@@ -16,16 +16,35 @@ ImageSoundsModel::ImageSoundsModel() : QAbstractListModel()
 
 ImageSoundsModel::~ImageSoundsModel()
 {
-
+    qDeleteAll(mImageList);
+    mImageList.clear();
 }
 
 ImageSounds& ImageSoundsModel::addImage(const QString &name)
 {
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    mImageList << ImageSounds(name);
+    mImageList << new ImageSounds(name);
+    connect(mImageList.last(), &ImageSounds::dataChanged, this, &ImageSoundsModel::imageHasChanged);
     endInsertRows();
-    return mImageList.last();
+    return *mImageList.last();
 }
+static ImageSounds ImgNotFound("404");
+ImageSounds &ImageSoundsModel::getImage(const QString &name)
+{
+    for(auto& img : mImageList){
+        if(img->name() == name)
+            return *img;
+    }
+    return ImgNotFound;
+}
+
+bool ImageSoundsModel::hasImage(const QString &name) const
+{
+    return std::any_of(mImageList.begin(), mImageList.end(), [&name](auto img){
+        return img->name() == name;
+    });
+}
+
 
 int ImageSoundsModel::rowCount(const QModelIndex &) const
 {
@@ -35,7 +54,7 @@ int ImageSoundsModel::rowCount(const QModelIndex &) const
 QVariant ImageSoundsModel::data(const QModelIndex &index, int role) const
 {
     if(index.row() >= 0 && index.row() < mImageList.length()){
-        const ImageSounds& img = mImageList.at(index.row());
+        const ImageSounds& img = *mImageList.at(index.row());
         switch (role) {
         case NameRole:
             return img.name();
@@ -56,7 +75,22 @@ QHash<int, QByteArray> ImageSoundsModel::roleNames() const
     return roles;
 }
 
-ImageSounds::ImageSounds(const QString &name): mName(name)
+void ImageSoundsModel::imageHasChanged(const QString &name)
+{
+    int row = -1;
+    int lookedAtRow = 0;
+    for(auto& img : mImageList){
+        if(img->name() == name){
+            row = lookedAtRow;
+        }
+        ++lookedAtRow;
+    }
+    QModelIndex changedIndex = index(row, 0);
+    emit dataChanged(changedIndex,changedIndex);
+}
+
+ImageSounds::ImageSounds(const QString &name): QObject(nullptr),
+    mName(name)
 {
 
 }
@@ -74,6 +108,7 @@ QString ImageSounds::imgPath() const
 void ImageSounds::setImgPath(const QString &imgPath)
 {
     mImgPath = imgPath;
+    emit dataChanged(mName);
 }
 
 QStringList ImageSounds::imgSounds() const
@@ -84,9 +119,11 @@ QStringList ImageSounds::imgSounds() const
 void ImageSounds::setImgSounds(const QStringList &imgSounds)
 {
     mImgSounds = imgSounds;
+    emit dataChanged(mName);
 }
 
 void ImageSounds::setImgSounds(const QString &imgSounds)
 {
     mImgSounds = imgSounds.split(" ");
+    emit dataChanged(mName);
 }

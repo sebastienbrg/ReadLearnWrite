@@ -16,7 +16,7 @@ void ImageSoundModelManager::addImageSoundToModel(const QString &imageName,
                                                   const QString& imageFilePath,
                                                   const QString& imageSounds)
 {
-    ImageSounds& img =  mModel->addImage(imageName);
+    ImageSounds& img = mModel->hasImage(imageName)? mModel->getImage(imageName) : mModel->addImage(imageName);
     img.setImgPath(imageFilePath);
     img.setImgSounds(imageSounds);
 }
@@ -26,6 +26,7 @@ void ImageSoundModelManager::initModel()
     for(auto name : {"bla", "blou", "blo", "blé"}){
         ImageSounds& img = mModel->addImage(name);
         img.setImgSounds(QStringList() << "b" << "l" << "a");
+        img.setImgPath("../LetterDrawer/img/arbre.png");
     }
 
 }

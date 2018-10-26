@@ -4,9 +4,11 @@
 #include <QAbstractListModel>
 #include <QStringList>
 
-class ImageSounds {
+class ImageSounds : public QObject {
+    Q_OBJECT
 public:
     ImageSounds(const QString& name);
+    ImageSounds(const ImageSounds& ) = default;
     QString name() const;
     QString imgPath() const;
     void setImgPath(const QString &imgPath);
@@ -14,7 +16,8 @@ public:
     QStringList imgSounds() const;
     void setImgSounds(const QStringList &imgSounds);
     void setImgSounds(const QString& imgSounds);
-
+signals:
+    void dataChanged(const QString& name);
 private:
     QString mName;
     QString mImgPath;
@@ -33,12 +36,16 @@ public:
     explicit ImageSoundsModel();
     virtual ~ImageSoundsModel() override;
     ImageSounds &addImage(const QString& name);
+    ImageSounds &getImage(const QString& name);
+    bool hasImage(const QString& name)const;
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex& index, int role) const override;
+    Q_INVOKABLE QVariant data(const QModelIndex& index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
+private slots:
+    void imageHasChanged(const QString& name);
 signals:
 private:
-    QList<ImageSounds> mImageList;
+    QList<ImageSounds*> mImageList;
 };
 
 #endif // IMAGESOUNDSMODEL_H
