@@ -80,7 +80,7 @@ void ImageSoundsModel::imageHasChanged(const QString &name)
     int row = -1;
     int lookedAtRow = 0;
     for(auto& img : mImageList){
-        if(img->name() == name){
+         if(img->name() == name){
             row = lookedAtRow;
         }
         ++lookedAtRow;
