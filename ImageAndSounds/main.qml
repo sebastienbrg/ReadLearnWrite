@@ -22,11 +22,13 @@ Window {
                 Row{
                     spacing: 3
                     Text{
+                        id: urlLabel
                         text: "Image url:"
+                        width: 100;
                     }
                     TextInput{
                         id: imgUrl
-                        width: 200
+                        width: formCol.width - urlLabel.width - parent.spacing
                     }
                 }
                 Row{
@@ -56,7 +58,7 @@ Window {
         }
     }
     function loadImage(name, filePath, sounds){
-        console.log("Loading img at index ", name);
+        console.log("Loading img at index ", name, filePath);
         imgName.text = name;
         imgUrl.text = filePath;
         image.source = filePath;
@@ -64,6 +66,7 @@ Window {
     }
 
     ListView{
+        id: listOfImages
         anchors.fill: parent;
         anchors.leftMargin: imgRect.width
         anchors.topMargin: tools.height
@@ -81,13 +84,7 @@ Window {
         anchors.bottom: tools.bottom
         anchors.left : tools.left
         anchors.margins: 5
-        Button{
-            id: loadImg
-            text: "Load img"
-            onClicked: {
-                image.source = imgUrl.text;
-            }
-        }
+
         Button{
             id: saveImg
             text: "Save img"
@@ -95,7 +92,7 @@ Window {
                 imageSoundsManager.addImageSoundToModel(imgName.text,
                                                         imgUrl.text,
                                                         imgSounds.text);
-                image.source = imgUrl.text;
+                listOfImages.currentIndex = listOfImages.currentIndex
             }
         }
     }

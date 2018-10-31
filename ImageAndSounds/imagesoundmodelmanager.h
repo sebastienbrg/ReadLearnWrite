@@ -3,8 +3,10 @@
 
 #include <QObject>
 #include <memory>
+#include <QNetworkAccessManager>
 
 #include "imagesoundsmodel.h"
+class QNetworkReply;
 
 class ImageSoundModelManager : public QObject
 {
@@ -12,10 +14,20 @@ class ImageSoundModelManager : public QObject
 public:
     explicit ImageSoundModelManager(QObject *parent = nullptr);
     ImageSoundsModel* getModel() const;
-    Q_INVOKABLE void addImageSoundToModel(const QString& imageName, const QString &imageFilePath, const QString &imageSounds);
+    Q_INVOKABLE void addImageSoundToModel(const QString& imageName, QString imageFilePath, const QString &imageSounds);
+private slots:
+    void downloadFinished(QNetworkReply* repl);
 private:
     void initModel();
+    void createDirIfNedded(const QString& imageName);
+    void createInfoFile(const QString& imageName, const QString& sounds);
     std::unique_ptr<ImageSoundsModel> mModel;
+    void dowloadFile(const QString& imageName, QString &imageFilePath);
+
+
+    QNetworkAccessManager mWebCtrl;
+    QByteArray mDownloadedData;
+    QString mCurrentFileDownloaded;
 
 };
 

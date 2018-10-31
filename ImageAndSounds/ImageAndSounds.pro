@@ -1,4 +1,4 @@
-QT += quick
+QT += quick network
 CONFIG += c++14
 
 # The following define makes your compiler emit warnings if you use
