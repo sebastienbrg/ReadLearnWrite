@@ -23,7 +23,7 @@ Item {
                 y:letterY
                 letter:name
                 onSelected: {
-                    if(name === letterManager.letter){
+                    if(name === letterManager.letter && !validated){
                         root.letterSelected(name)
                         validated = true;
                     } else {
