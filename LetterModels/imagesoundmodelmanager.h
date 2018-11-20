@@ -4,11 +4,11 @@
 #include <QObject>
 #include <memory>
 #include <QNetworkAccessManager>
-
+#include "lettermodels_global.h"
 #include "imagesoundsmodel.h"
 class QNetworkReply;
 
-class ImageSoundModelManager : public QObject
+class LETTERMODELSSHARED_EXPORT ImageSoundModelManager : public QObject
 {
     Q_OBJECT
 public:

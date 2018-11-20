@@ -3,8 +3,9 @@
 
 #include <QAbstractListModel>
 #include <QStringList>
+#include "lettermodels_global.h"
 
-class ImageSounds : public QObject {
+class LETTERMODELSSHARED_EXPORT ImageSounds : public QObject {
     Q_OBJECT
 public:
     ImageSounds(const QString& name);
@@ -24,7 +25,7 @@ private:
     QStringList mImgSounds;
 };
 
-class ImageSoundsModel : public QAbstractListModel
+class LETTERMODELSSHARED_EXPORT ImageSoundsModel : public QAbstractListModel
 {
     Q_OBJECT
 public:

@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QMap>
 #include <QPainterPath>
+#include "lettermodels_global.h"
 
-class PathElement {
+class LETTERMODELSSHARED_EXPORT PathElement {
 public:
     enum MoveType{
         Move = 0,
@@ -25,7 +26,7 @@ private:
     int ctrY;
 };
 
-class Path {
+class LETTERMODELSSHARED_EXPORT Path {
 public:
     Path() {}
     Path(QString serialized);
@@ -36,7 +37,7 @@ private:
     QList<PathElement> mElements;
 };
 
-class PathModel : public QObject
+class LETTERMODELSSHARED_EXPORT PathModel : public QObject
 {
     Q_OBJECT
 public:

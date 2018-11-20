@@ -13,11 +13,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp \
-    pathmodel.cpp
+        main.cpp
 
 RESOURCES += qml.qrc
+HEADERS +=
 
+INCLUDEPATH += ../LetterModels
+LIBS += ../Libs/LetterModels.dll
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -29,6 +31,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    pathmodel.h
 
